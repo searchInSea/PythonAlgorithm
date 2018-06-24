@@ -13,7 +13,7 @@ class RBNode(object):
         self.value = value  #卫星数据
 
     def __str__(self):
-        #print self.__class__
+        """打印节点信息"""
         retStr = 'key='+str(self.key)+ \
                  ('\ncolor='+'Red' if self.color == RED_COLOR else '\nBlack')+ \
                 '\nValue='+str(self.value)+ \
@@ -24,8 +24,8 @@ class RBNode(object):
         return retStr
 
 class RBTree(object):
-    InvalidNode = RBNode(color = BLACK_COLOR)
-    walkQueue = Queue(2048)
+    InvalidNode = RBNode(color = BLACK_COLOR)    #哨兵
+    walkQueue = Queue(2048)                      #按层输出时使用的队列，目前最大支持4096个元素
     def __init__(self, root = NULL):
         self.root = root
         if root:
@@ -76,15 +76,15 @@ class RBTree(object):
                 uncleNode = Node.p.p.R
 
                 if uncleNode.color == RED_COLOR:  #case1:叔父节点颜色为红色
-                    Node.p.color = BLACK_COLOR
+                    Node.p.color = BLACK_COLOR    #case1:叔父和父节点置黑,祖父置红
                     uncleNode.color = BLACK_COLOR
                     Node.p.p.color = RED_COLOR
                     Node = Node.p.p               #case1:问题从node提升到了node.p.p
                 elif Node.p.R == Node:
-                    self.__RotLeft(Node.p)   #case2: 将case2转化成case3
+                    self.__RotLeft(Node.p)   #case2: 叔父节点为黑色, 修正节点位于父节点的右节点上,通过左旋将case2转化成case3
                     Node = Node.L
                 else:
-                    Node.p.color = BLACK_COLOR    #case3:右旋解决
+                    Node.p.color = BLACK_COLOR    #case3:叔父节点为黑色,祖父为黑色,交换父和祖父颜色并右旋解决
                     Node.p.p.color = RED_COLOR
                     self.__RotRight(Node.p.p)
 

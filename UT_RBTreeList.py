@@ -27,7 +27,7 @@ def testRBTreeList():
     List1.inserNode(RBNode(15, value=4))
     List1.delNodeByKey(5)
     List1.delNodeByKey(7)
-    #print(List1)
+    print(List1)
     List1.floorWalk()
 
 #testRBNodeFun1()
