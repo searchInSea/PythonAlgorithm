@@ -41,7 +41,7 @@ end
 B = B/sampleNum
 hold on
 x2Tem = -w(1)/w(2)*X(:,1)-B/w(2);
-plot(X(:,1),x2Tem, '-r')   %划分结果,红色线条
+plot(X(:,1),x2Tem, '-r')   %划分结果,红色线条， 最终计算结果
 
 
 
